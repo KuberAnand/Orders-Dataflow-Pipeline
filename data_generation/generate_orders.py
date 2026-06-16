@@ -1,9 +1,10 @@
 import pandas as pd
 import random
 import numpy as np
+import os
 from faker import Faker
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 fake = Faker()
 
@@ -41,20 +42,22 @@ customers = {}
 
 for i in range(1, 2001):
     cid = f"CUST{i:04d}"
+    state = random.choice([
+        "California",
+        "Texas",
+        "Florida",
+        "New York",
+        "Illinois",
+        "Georgia",
+        "Arizona",
+        "Washington"
+    ])
 
     customers[cid] = {
         "customer_name": fake.name(),
         "email": fake.email(),
-        "state": random.choice([
-            "California",
-            "Texas",
-            "Florida",
-            "New York",
-            "Illinois",
-            "Georgia",
-            "Arizona",
-            "Washington"
-        ])
+        "city": fake.city(),
+        "state": state
     }
 
 customer_ids = list(customers.keys())
@@ -115,13 +118,16 @@ for i in range(5000):
         "customer_id": customer_id,
         "customer_name": customer["customer_name"],
         "email": customer["email"],
+        "city": customer["city"],
         "state": customer["state"],
         "product_name": product_name,
         "category": category,
         "quantity": qty,
         "unit_price": unit_price,
         "revenue": revenue,
-        "store_name": random.choice(stores)
+        "store_name": random.choice(stores),
+        "shipping_method": random.choice(["Standard", "Expedited", "Two-Day"]),
+        "shipping_status": random.choice(["Delivered", "Shipped", "Processing"])
     })
 
 df = pd.DataFrame(rows)
@@ -161,7 +167,12 @@ df.loc[chair_idx, "product_name"] = random.choice([
 # Save
 # ----------------------------------
 
-DATA_DIR = "/opt/airflow/data"
+DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data")
+source_file_name = f"orders_{datetime.now(timezone.utc).date().isoformat()}.csv"
+loaded_at = datetime.now(timezone.utc).isoformat()
+
+df["source_file_name"] = source_file_name
+df["loaded_at"] = loaded_at
 
 Path(DATA_DIR).mkdir(
     parents=True,
