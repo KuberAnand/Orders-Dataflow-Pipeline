@@ -1,0 +1,6 @@
+pandas
+faker
+google-cloud-bigquery
+google-generativeai
+python-dotenv
+apache-airflow
