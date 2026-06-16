@@ -10,6 +10,7 @@ sql_files = [
     "/opt/airflow/sql/clean_orders.sql",
     "/opt/airflow/sql/dim_customers.sql",
     "/opt/airflow/sql/dim_products.sql",
+    "/opt/airflow/sql/dim_stores.sql",
     "/opt/airflow/sql/fact_orders.sql"
 ]
 

@@ -4,3 +4,5 @@ google-cloud-bigquery
 google-generativeai
 python-dotenv
 apache-airflow
+db-dtypes
+tabulate
