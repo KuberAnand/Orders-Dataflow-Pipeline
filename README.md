@@ -1,6 +1,6 @@
 # Orders-Dataflow-Pipeline
 
-Take-home data engineering assessment solution for a daily e-commerce orders pipeline on GCP and BigQuery.
+E-commerce orders pipeline on GCP and BigQuery.
 
 ## Architecture
 
@@ -54,7 +54,6 @@ Analytics layer:
 - `dim_products`: standardized product names and categories.
 - `dim_stores`: online store dimension.
 
-`clean_orders` and `raw_orders` are partitioned to control BigQuery scan cost. Fact and clean tables are clustered by common filter/join fields.
 
 ## Data Quality Rules
 
