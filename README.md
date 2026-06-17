@@ -2,6 +2,10 @@
 
 E-commerce orders pipeline on GCP and BigQuery.
 
+# Demo Video Link 
+
+https://drive.google.com/file/d/1F-_CRbHYQw0KLqRBw9dTsyFcg7eJizMZ/view?usp=sharing
+
 ## Architecture
 
 Local assessment flow:
